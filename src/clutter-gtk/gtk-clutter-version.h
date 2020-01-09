@@ -54,7 +54,7 @@ G_BEGIN_DECLS
  * The minor version of the Clutter-GTK library (2, if %CLUTTER_GTK_VERSION
  * is 1.2.3)
  */
-#define CLUTTER_GTK_MINOR_VERSION       (4)
+#define CLUTTER_GTK_MINOR_VERSION       (8)
 
 /**
  * CLUTTER_GTK_MICRO_VERSION:
@@ -62,14 +62,14 @@ G_BEGIN_DECLS
  * The micro version of the Clutter-GTK library (3, if %CLUTTER_GTK_VERSION
  * is 1.2.3)
  */
-#define CLUTTER_GTK_MICRO_VERSION       (4)
+#define CLUTTER_GTK_MICRO_VERSION       (2)
 
 /**
  * CLUTTER_GTK_VERSION:
  *
  * The full version of the Clutter-GTK library, like 1.2.3
  */
-#define CLUTTER_GTK_VERSION             1.4.4
+#define CLUTTER_GTK_VERSION             1.8.2
 
 /**
  * CLUTTER_GTK_VERSION_S:
@@ -77,7 +77,7 @@ G_BEGIN_DECLS
  * The full version of the Clutter-GTK library, in string form (suited for
  * string concatenation)
  */
-#define CLUTTER_GTK_VERSION_S           "1.4.4"
+#define CLUTTER_GTK_VERSION_S           "1.8.2"
 
 /**
  * CLUTTER_GTK_VERSION_HEX:

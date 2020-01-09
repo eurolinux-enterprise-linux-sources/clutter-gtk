@@ -1,18 +1,24 @@
-%define         clutter_version 1.0
+%global         clutter_version 1.23.7
+%global         gtk3_version 3.21.0
+
+%global         api_ver 1.0
 
 Name:           clutter-gtk
-Version:        1.4.4
-Release:        7%{?dist}
+Version:        1.8.2
+Release:        1%{?dist}
 Summary:        A basic GTK clutter widget
 
 Group:          Development/Languages
 License:        LGPLv2+
 URL:            http://www.clutter-project.org
-Source0:        http://download.gnome.org/sources/%{name}/1.4/%{name}-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-%{version}.tar.xz
 
-BuildRequires:  gtk3-devel >= 3.0.0
-BuildRequires:  clutter-devel >= 1.9
+BuildRequires:  clutter-devel >= %{clutter_version}
+BuildRequires:  gtk3-devel >= %{gtk3_version}
 BuildRequires:  gobject-introspection-devel
+
+Requires:       clutter%{?_isa} >= %{clutter_version}
+Requires:       gtk3%{?_isa} >= %{gtk3_version}
 
 %description
 clutter-gtk is a library which allows the embedding of a Clutter
@@ -22,8 +28,7 @@ GTK+ widgets inside the stage.
 %package devel
 Summary:        Clutter-gtk development environment
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
-Requires:       gtk3-devel clutter-devel
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Header files and libraries for building a extension library for the
@@ -40,29 +45,38 @@ make %{?_smp_mflags} V=1
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p"
+%make_install
 
 #Remove libtool archives.
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
+find %{buildroot} -type f -name "*.la" -delete
 
 %find_lang cluttergtk-1.0
+
+%check
+make check %{?_smp_mflags} V=1
+
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files -f cluttergtk-1.0.lang
-%doc COPYING NEWS
+%license COPYING
+%doc NEWS
 %{_libdir}/*.so.*
-%{_libdir}/girepository-1.0/GtkClutter-%{clutter_version}.typelib
+%{_libdir}/girepository-1.0/GtkClutter-%{api_ver}.typelib
 
 %files devel
-%{_includedir}/clutter-gtk-%{clutter_version}/
-%{_libdir}/pkgconfig/clutter-gtk-%{clutter_version}.pc
+%{_includedir}/clutter-gtk-%{api_ver}/
+%{_libdir}/pkgconfig/clutter-gtk-%{api_ver}.pc
 %{_libdir}/*.so
-%{_datadir}/gir-1.0/GtkClutter-%{clutter_version}.gir
+%{_datadir}/gir-1.0/GtkClutter-%{api_ver}.gir
 %{_datadir}/gtk-doc/html/clutter-gtk-1.0
 
 %changelog
+* Wed Oct 19 2016 Kalev Lember <klember@redhat.com> - 1.8.2-1
+- Update to 1.8.2
+- Resolves: #1386834
+
 * Fri May 22 2015 Florian Müllner <fmuellner@redhat.com> - 1.4.4-7
 - Drop obsolete (and unapplied) patch
   Resolves: #1174510

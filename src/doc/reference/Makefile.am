@@ -15,7 +15,7 @@ DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 # gtk-doc will search all .c & .h files beneath here for inline comments
 # documenting the functions and macros.
 # e.g. DOC_SOURCE_DIR=../../../gtk
-DOC_SOURCE_DIR=../../clutter-gtk
+DOC_SOURCE_DIR=$(top_srcdir)/clutter-gtk $(top_builddir)/clutter-gtk
 
 # Extra options to pass to gtkdoc-scangobj. Not normally needed.
 SCANGOBJ_OPTIONS=--type-init-func="clutter_base_init()"
@@ -26,7 +26,7 @@ SCAN_OPTIONS=
 
 # Extra options to supply to gtkdoc-mkdb.
 # e.g. MKDB_OPTIONS=--sgml-mode --output-format=xml
-MKDB_OPTIONS=--sgml-mode --output-format=xml --name-space=gtk_clutter
+MKDB_OPTIONS=--xml-mode --output-format=xml --name-space=gtk_clutter
 
 # Extra options to supply to gtkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
@@ -74,7 +74,7 @@ expand_content_files=
 # e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
 # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
 
-INCLUDES=-I$(top_srcdir) $(CLUTTER_GTK_DEPS_CFLAGS)
+AM_CFLAGS=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/clutter-gtk $(CLUTTER_GTK_DEPS_CFLAGS)
 GTKDOC_LIBS=$(top_builddir)/clutter-gtk/libclutter-gtk-$(CLUTTER_GTK_API_VERSION).la $(CLUTTER_GTK_DEPS_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.

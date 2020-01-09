@@ -6,9 +6,9 @@ CLEANFILES =
 DISTCLEANFILES =
 EXTRA_DIST =
 
-INCLUDES = -I$(srcdir) -I$(top_srcdir) -I$(top_builddir)
 
 AM_CPPFLAGS = \
+	-I$(srcdir) -I$(top_srcdir) -I$(top_builddir) \
 	-DG_LOG_DOMAIN=\"Clutter-Gtk\" 		\
 	-DPREFIX=\""$(prefix)"\" 		\
 	-DLIBDIR=\""$(libdir)"\"		\
@@ -47,7 +47,7 @@ source_h_private = \
 libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_SOURCES = $(source_c) $(source_h) $(source_h_private)
 libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LIBADD  = $(CLUTTER_GTK_DEPS_LIBS) $(LIBM)
 libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LDFLAGS = \
-	$(CLUTTER_LT_LDFLAGS) \
+	$(CLUTTER_GTK_LT_LDFLAGS) \
 	-export-symbols-regex "^gtk_clutter.*"
 
 cluttergtkheadersdir = $(includedir)/clutter-gtk-@CLUTTER_GTK_API_VERSION@/clutter-gtk

@@ -25,7 +25,7 @@ gtk_clutter_offscreen_add (GtkContainer *container,
   GTK_CONTAINER_CLASS (_gtk_clutter_offscreen_parent_class)->add (container, child);
 
   if (offscreen->actor != NULL &&
-      CLUTTER_ACTOR_IS_VISIBLE (offscreen->actor))
+      clutter_actor_is_visible (offscreen->actor))
     {
       /* force a relayout */
       clutter_actor_queue_relayout (offscreen->actor);
@@ -41,7 +41,7 @@ gtk_clutter_offscreen_remove (GtkContainer *container,
   GTK_CONTAINER_CLASS (_gtk_clutter_offscreen_parent_class)->remove (container, child);
 
   if (offscreen->actor != NULL &&
-      CLUTTER_ACTOR_IS_VISIBLE (offscreen->actor))
+      clutter_actor_is_visible (offscreen->actor))
     {
       /* force a relayout */
       clutter_actor_queue_relayout (offscreen->actor);
@@ -115,6 +115,7 @@ gtk_clutter_offscreen_realize (GtkWidget *widget)
   gint attributes_mask;
   guint border_width;
   GtkWidget *parent, *child;
+  GdkScreen *screen;
 
   gtk_widget_set_realized (widget, TRUE);
 
@@ -135,13 +136,16 @@ gtk_clutter_offscreen_realize (GtkWidget *widget)
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL;
 
   parent = gtk_widget_get_parent (widget);
+  screen = gtk_widget_get_screen (widget);
 
-  window = gdk_window_new (gtk_widget_get_root_window (widget),
+  window = gdk_window_new (gdk_screen_get_root_window (screen),
 			   &attributes,
                            attributes_mask);
   gtk_widget_set_window (widget, window);
   gdk_window_set_user_data (window, widget);
 
+  gdk_offscreen_window_set_embedder (gtk_widget_get_window (parent),
+                                     window);
   g_signal_connect (window, "to-embedder",
 		    G_CALLBACK (offscreen_window_to_parent),
                     widget);
@@ -318,7 +322,11 @@ static void
 _gtk_clutter_offscreen_init (GtkClutterOffscreen *offscreen)
 {
   gtk_widget_set_has_window (GTK_WIDGET (offscreen), TRUE);
+
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_container_set_resize_mode (GTK_CONTAINER (offscreen), GTK_RESIZE_IMMEDIATE);
+  G_GNUC_END_IGNORE_DEPRECATIONS
+
   offscreen->active = TRUE;
 }
 

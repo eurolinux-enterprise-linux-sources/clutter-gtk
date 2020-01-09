@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Intel Corporation
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the clutter-gtk package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: clutter-gtk 1.4.4\n"
+"Project-Id-Version: clutter-gtk 1.8.2\n"
 "Report-Msgid-Bugs-To: http://bugzilla.clutter-project.org/enter_bug.cgi?"
 "product=clutter-gtk\n"
-"POT-Creation-Date: 2013-03-19 10:09-0300\n"
+"POT-Creation-Date: 2016-09-18 15:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: clutter-gtk/gtk-clutter-texture.c:134
+#: clutter-gtk/gtk-clutter-texture.c:137
 #, c-format
 msgid "Stock ID '%s' not found"
 msgstr ""

@@ -2,12 +2,12 @@
 # An odd micro number indicates in-progress development, (eg. from git)
 # An even micro number indicates a released version.
 m4_define([clutter_gtk_major], [1])
-m4_define([clutter_gtk_minor], [4])
-m4_define([clutter_gtk_micro], [4])
+m4_define([clutter_gtk_minor], [8])
+m4_define([clutter_gtk_micro], [2])
 m4_define([clutter_gtk_version], [clutter_gtk_major.clutter_gtk_minor.clutter_gtk_micro])
 
 # increase the interface age for each release; if the API changes, set to 0
-m4_define([clutter_gtk_interface_age], [1])
+m4_define([clutter_gtk_interface_age], [2])
 m4_define([clutter_gtk_binary_age], [m4_eval(100 * clutter_gtk_minor + clutter_gtk_micro)])
 
 m4_define([clutter_gtk_release_status],
@@ -56,7 +56,7 @@ AC_MSG_CHECKING([if building for some Win32 platform])
 AS_CASE([$host],
         [*-*-mingw*|*-*-cygwin*],
         [
-          CLUTTER_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
+          CLUTTER_GTK_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
           platform_win32=yes
         ],
 
@@ -82,8 +82,8 @@ AC_HEADER_STDC
 AC_CHECK_LIBM
 AC_SUBST(LIBM)
 
-m4_define([clutter_req_version], [1.13.7])
-m4_define([gtk_req_version], [3.6.0])
+m4_define([clutter_req_version], [1.23.7])
+m4_define([gtk_req_version], [3.21.0])
 
 PKG_CHECK_MODULES([CLUTTER_GTK_DEPS], [clutter-1.0 >= clutter_req_version gtk+-3.0 >= gtk_req_version])
 AC_SUBST([CLUTTER_GTK_DEPS_CFLAGS])

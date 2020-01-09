@@ -73,20 +73,14 @@ frame_cb (ClutterTimeline *timeline,
   guint           rotation = clutter_timeline_get_progress (timeline) * 360.0f;
 
   /* Rotate everything clockwise about stage center*/
-  clutter_actor_set_rotation (CLUTTER_ACTOR (oh->group),
-                              CLUTTER_Z_AXIS,
-                              rotation,
-                              WINWIDTH / 2, WINHEIGHT / 2, 0);
+  clutter_actor_set_rotation_angle (oh->group, CLUTTER_Z_AXIS, rotation);
 
   for (i = 0; i < NHANDS; i++)
     {
       /* rotate each hand around there centers */
-      clutter_actor_set_rotation (oh->hand[i],
-                                  CLUTTER_Z_AXIS,
-                                  - 6.0 * rotation,
-                                  clutter_actor_get_width (oh->hand[i]) / 2,
-                                  clutter_actor_get_height (oh->hand[i]) / 2,
-                                  0);
+      clutter_actor_set_rotation_angle (oh->hand[i],
+                                        CLUTTER_Z_AXIS,
+                                        - 6.0 * rotation);
       if (fade == TRUE)
         clutter_actor_set_opacity (oh->hand[i], (255 - (rotation % 255)));
     }
@@ -94,9 +88,14 @@ frame_cb (ClutterTimeline *timeline,
 
 static void
 clickity (GtkButton *button,
-          gpointer ud)
+          gpointer   stack)
 {
-        fade = !fade;
+  if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (stack)), "label") == 0)
+    gtk_stack_set_visible_child_name (GTK_STACK (stack), "clutter");
+  else
+    gtk_stack_set_visible_child_name (GTK_STACK (stack), "label");
+
+  fade = !fade;
 }
 
 static void
@@ -119,14 +118,13 @@ int
 main (int argc, char *argv[])
 {
   ClutterTimeline *timeline;
-  ClutterActor    *stage;
-  ClutterConstraint *constraint;
-  GtkWidget       *window, *clutter;
-  GtkWidget       *label, *button, *vbox;
-  GdkPixbuf       *pixbuf;
-  SuperOH         *oh;
-  gint             i;
-  GError          *error;
+  ClutterActor *stage;
+  GtkWidget *window, *stack, *clutter;
+  GtkWidget *label, *button, *vbox;
+  GdkPixbuf *pixbuf;
+  SuperOH *oh;
+  gint i;
+  GError *error;
 
   error = NULL;
   if (gtk_clutter_init_with_args (&argc, &argv,
@@ -164,8 +162,15 @@ main (int argc, char *argv[])
   gtk_widget_set_vexpand (vbox, TRUE);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
+  stack = gtk_stack_new ();
+  gtk_container_add (GTK_CONTAINER (vbox), stack);
+
+  label = gtk_label_new ("This is a label in a stack");
+  gtk_stack_add_named (GTK_STACK (stack), label, "label");
+
   clutter = gtk_clutter_embed_new ();
-  gtk_container_add (GTK_CONTAINER (vbox), clutter);
+  gtk_stack_add_named (GTK_STACK (stack), clutter, "clutter");
+  gtk_widget_realize (clutter);
 
   stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (clutter));
   clutter_actor_set_background_color (stage, CLUTTER_COLOR_LightSkyBlue);
@@ -175,21 +180,18 @@ main (int argc, char *argv[])
   gtk_widget_set_hexpand (label, TRUE);
 
   button = gtk_button_new_with_label ("This is a button...clicky");
-  g_signal_connect (button, "clicked", G_CALLBACK (clickity), NULL);
+  g_signal_connect (button, "clicked", G_CALLBACK (clickity), stack);
   gtk_container_add (GTK_CONTAINER (vbox), button);
   gtk_widget_set_hexpand (button, TRUE);
 
-  button = gtk_button_new_with_label ("Fullscreen");
-  gtk_button_set_image (GTK_BUTTON (button),
-                        gtk_image_new_from_stock (GTK_STOCK_FULLSCREEN,
-                                                  GTK_ICON_SIZE_BUTTON));
+  button = gtk_button_new_with_mnemonic ("_Fullscreen");
   g_signal_connect (button, "clicked",
                     G_CALLBACK (on_fullscreen),
                     window);
   gtk_container_add (GTK_CONTAINER (vbox), button);
   gtk_widget_set_hexpand (button, TRUE);
 
-  button = gtk_button_new_from_stock (GTK_STOCK_QUIT);
+  button = gtk_button_new_with_mnemonic ("_Quit");
   g_signal_connect_swapped (button, "clicked",
                             G_CALLBACK (gtk_widget_destroy),
                             window);
@@ -200,6 +202,7 @@ main (int argc, char *argv[])
   oh->stage = stage;
 
   oh->group = clutter_actor_new ();
+  clutter_actor_set_pivot_point (oh->group, 0.5, 0.5);
   
   for (i = 0; i < NHANDS; i++)
     {
@@ -222,6 +225,7 @@ main (int argc, char *argv[])
       y = WINHEIGHT / 2 + RADIUS * sin (i * M_PI / (NHANDS / 2)) - h / 2;
 
       clutter_actor_set_position (oh->hand[i], x, y);
+      clutter_actor_set_pivot_point (oh->hand[i], 0.5, 0.5);
 
       /* Add to our group group */
       clutter_actor_add_child (oh->group, oh->hand[i]);
@@ -230,10 +234,7 @@ main (int argc, char *argv[])
   /* Add the group to the stage */
   clutter_actor_add_child (stage, oh->group);
 
-  constraint = clutter_align_constraint_new (oh->stage, CLUTTER_ALIGN_X_AXIS, 0.5);
-  clutter_actor_add_constraint (oh->group, constraint);
-  constraint = clutter_align_constraint_new (oh->stage, CLUTTER_ALIGN_Y_AXIS, 0.5);
-  clutter_actor_add_constraint (oh->group, constraint);
+  clutter_actor_add_constraint (oh->group, clutter_align_constraint_new (oh->stage, CLUTTER_ALIGN_BOTH, 0.5));
 
   g_signal_connect (stage, "button-press-event",
 		    G_CALLBACK (input_cb), 
