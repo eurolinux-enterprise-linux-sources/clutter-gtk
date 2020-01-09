@@ -54,7 +54,7 @@ G_BEGIN_DECLS
  * The minor version of the Clutter-GTK library (2, if %CLUTTER_GTK_VERSION
  * is 1.2.3)
  */
-#define CLUTTER_GTK_MINOR_VERSION       (4)
+#define CLUTTER_GTK_MINOR_VERSION       (8)
 
 /**
  * CLUTTER_GTK_MICRO_VERSION:
@@ -69,7 +69,7 @@ G_BEGIN_DECLS
  *
  * The full version of the Clutter-GTK library, like 1.2.3
  */
-#define CLUTTER_GTK_VERSION             1.4.4
+#define CLUTTER_GTK_VERSION             1.8.4
 
 /**
  * CLUTTER_GTK_VERSION_S:
@@ -77,7 +77,7 @@ G_BEGIN_DECLS
  * The full version of the Clutter-GTK library, in string form (suited for
  * string concatenation)
  */
-#define CLUTTER_GTK_VERSION_S           "1.4.4"
+#define CLUTTER_GTK_VERSION_S           "1.8.4"
 
 /**
  * CLUTTER_GTK_VERSION_HEX:
@@ -102,6 +102,11 @@ G_BEGIN_DECLS
          (CLUTTER_GTK_MAJOR_VERSION == (major) && CLUTTER_GTK_MINOR_VERSION > (minor)) || \
          (CLUTTER_GTK_MAJOR_VERSION == (major) && CLUTTER_GTK_MINOR_VERSION == (minor) && CLUTTER_GTK_MICRO_VERSION >= (micro)))
 
+#ifndef CLUTTER_GTK_EXTERN
+#define CLUTTER_GTK_EXTERN extern
+#endif
+
+CLUTTER_GTK_EXTERN
 gboolean gtk_clutter_check_version (guint major,
                                     guint minor,
                                     guint micro);
