@@ -2,14 +2,13 @@
 
 Name:           clutter-gtk
 Version:        1.4.4
-Release:        5%{?dist}
+Release:        7%{?dist}
 Summary:        A basic GTK clutter widget
 
 Group:          Development/Languages
 License:        LGPLv2+
 URL:            http://www.clutter-project.org
 Source0:        http://download.gnome.org/sources/%{name}/1.4/%{name}-%{version}.tar.xz
-Patch0:         clutter-gtk-fixdso.patch
 
 BuildRequires:  gtk3-devel >= 3.0.0
 BuildRequires:  clutter-devel >= 1.9
@@ -64,6 +63,14 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/gtk-doc/html/clutter-gtk-1.0
 
 %changelog
+* Fri May 22 2015 Florian Müllner <fmuellner@redhat.com> - 1.4.4-7
+- Drop obsolete (and unapplied) patch
+  Resolves: #1174510
+
+* Thu Mar 19 2015 Richard Hughes <rhughes@redhat.com> - 1.4.4-6
+- Rebuild against the new cogl
+- Resolves: #1174510
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.4.4-5
 - Mass rebuild 2014-01-24
 
