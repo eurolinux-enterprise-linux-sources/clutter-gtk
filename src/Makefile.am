@@ -2,10 +2,6 @@ include $(top_srcdir)/build/autotools/Makefile.am.silent
 
 ACLOCAL_AMFLAGS = -I build/autotools
 
-EXTRA_DIST =
-CLEANFILES =
-DISTCLEANFILES =
-
 SUBDIRS = build clutter-gtk doc examples po
 
 clutter-gtk-1.0.pc: clutter-gtk.pc
@@ -13,22 +9,10 @@ clutter-gtk-1.0.pc: clutter-gtk.pc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = clutter-gtk-1.0.pc
-EXTRA_DIST += clutter-gtk.pc.in
-CLEANFILES += clutter-gtk-1.0.pc
-DISTCLEANFILES += clutter-gtk.pc
 
-meson_build_data = \
-	meson.build \
-	meson_options.txt \
-	clutter-gtk/meson.build \
-	doc/meson.build \
-	doc/xml/meson.build \
-	doc/xml/gtkdocentities.ent.in \
-	examples/meson.build \
-	po/meson.build \
-	$()
-
-EXTRA_DIST += $(meson_build_data)
+EXTRA_DIST = clutter-gtk.pc.in
+CLEANFILES = clutter-gtk-1.0.pc
+DISTCLEANFILES = clutter-gtk.pc
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-maintainer-flags
 

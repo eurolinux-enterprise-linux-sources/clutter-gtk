@@ -1,4 +1,6 @@
+#ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
 
 #include "gtk-clutter-util.h"
 #include "gtk-clutter-offscreen.h"
@@ -21,24 +23,12 @@
 #include <clutter/win32/clutter-win32.h>
 #endif
 
-#if defined(CLUTTER_WINDOWING_WAYLAND)
-#include <clutter/wayland/clutter-wayland.h>
-#endif
-
 #if defined(GDK_WINDOWING_X11)
 #include <gdk/gdkx.h>
 #endif
 
 #if defined(GDK_WINDOWING_WIN32)
 #include <gdk/gdkwin32.h>
-#endif
-
-#if defined(GDK_WINDOWING_WAYLAND)
-#include <gdk/gdkwayland.h>
-#endif
-
-#if defined(GDK_WINDOWING_MIR)
-#include <gdk/gdkmir.h>
 #endif
 
 /**
@@ -60,10 +50,15 @@ static const guint clutter_gtk_micro_version = CLUTTER_GTK_MICRO_VERSION;
 
 static gboolean gtk_clutter_is_initialized = FALSE;
 
-static void
-gtk_clutter_init_internal (void)
+static gboolean
+post_parse_hook (GOptionContext  *context,
+                 GOptionGroup    *group,
+                 gpointer         data,
+                 GError         **error)
 {
   GdkDisplay *display;
+
+  gtk_clutter_is_initialized = TRUE;
 
   display = gdk_display_get_default ();
 
@@ -101,47 +96,7 @@ gtk_clutter_init_internal (void)
     }
   else
 #endif
-#if defined(GDK_WINDOWING_WAYLAND) && defined(CLUTTER_WINDOWING_WAYLAND)
-  if (clutter_check_windowing_backend (CLUTTER_WINDOWING_WAYLAND) &&
-      GDK_IS_WAYLAND_DISPLAY (display))
-    {
-      /* let GTK+ be in charge of the event handling */
-      clutter_wayland_disable_event_retrieval ();
-
-      clutter_wayland_set_display (gdk_wayland_display_get_wl_display (display));
-    }
-  else
-#endif
-#if defined(GDK_WINDOWING_MIR) && defined(CLUTTER_WINDOWING_MIR)
-  if (clutter_check_windowing_backend (CLUTTER_WINDOWING_MIR) &&
-      GDK_IS_MIR_DISPLAY (display))
-    {
-      /* let GTK+ be in charge of the event handling */
-      /* This is disabled until Mir does not support sub-surfaces.
-      clutter_mir_disable_event_retrieval ();
-      */
-
-      clutter_mir_set_connection (gdk_mir_display_get_mir_connection (display));
-    }
-  else
-#endif
     g_error ("*** Unsupported backend.");
-
-  /* We disable clutter accessibility support in order to not
-   * interfere with gtk accessibility support.
-   */
-  clutter_disable_accessibility ();
-}
-
-static gboolean
-post_parse_hook (GOptionContext  *context,
-                 GOptionGroup    *group,
-                 gpointer         data,
-                 GError         **error)
-{
-  gtk_clutter_is_initialized = TRUE;
-
-  gtk_clutter_init_internal ();
 
   /* this is required since parsing clutter's option group did not
    * complete the initialization process
@@ -226,7 +181,31 @@ gtk_clutter_init (int    *argc,
   if (!gtk_init_check (argc, argv))
     return CLUTTER_INIT_ERROR_UNKNOWN;
 
-  gtk_clutter_init_internal ();
+#if defined(CLUTTER_WINDOWING_GDK)
+  if (clutter_check_windowing_backend (CLUTTER_WINDOWING_GDK))
+    clutter_gdk_disable_event_retrieval ();
+#endif
+
+#if defined(GDK_WINDOWING_X11) && defined(CLUTTER_WINDOWING_X11)
+  if (clutter_check_windowing_backend (CLUTTER_WINDOWING_X11))
+    {
+      clutter_x11_set_use_argb_visual (TRUE);
+
+      clutter_x11_set_display (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+
+      clutter_x11_disable_event_retrieval ();
+    }
+#endif
+
+#if defined(CLUTTER_WINDOWING_WIN32)
+  if (clutter_check_windowing_backend (CLUTTER_WINDOWING_WIN32))
+    clutter_win32_disable_event_retrieval ();
+#endif
+
+  /* We disable clutter accessibility support in order to not
+   * interfere with gtk accessibility support.
+   */
+  clutter_disable_accessibility ();
 
   return clutter_init (argc, argv);
 }
@@ -269,15 +248,18 @@ gtk_clutter_init_with_args (int            *argc,
   if (gtk_clutter_is_initialized)
     return CLUTTER_INIT_SUCCESS;
 
+#if defined(CLUTTER_WINDOWING_X11)
+  /* enable ARGB visuals by default for Clutter */
+  clutter_x11_set_use_argb_visual (TRUE);
+#endif
+
   /* we let gtk+ open the display */
   gtk_group = gtk_get_option_group (TRUE);
 
   /* and we prevent clutter from doing so too */
   clutter_group = clutter_get_option_group_without_init ();
 
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   cogl_group = cogl_get_option_group ();
-  G_GNUC_END_IGNORE_DEPRECATIONS
 
   clutter_gtk_group = gtk_clutter_get_option_group ();
 

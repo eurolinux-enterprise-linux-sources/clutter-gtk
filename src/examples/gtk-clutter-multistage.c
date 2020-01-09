@@ -3,6 +3,17 @@
 
 #include <clutter-gtk/clutter-gtk.h>
 
+static void
+on_stage2_allocation_changed (ClutterActor           *stage_2,
+                              const ClutterActorBox  *allocation,
+                              ClutterAllocationFlags  flags,
+                              ClutterActor           *texture_2)
+{
+  clutter_actor_set_position (texture_2,
+                              (allocation->x2 - allocation->x1) / 2,
+                              (allocation->y2 - allocation->y1) / 2);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -39,14 +50,15 @@ main (int argc, char *argv[])
   stage1 = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (clutter1));
   clutter_actor_set_background_color (stage1, &col1);
   tex1 = gtk_clutter_texture_new ();
-  gtk_clutter_texture_set_from_icon_name (GTK_CLUTTER_TEXTURE (tex1),
-                                          clutter1,
-                                          "dialog-information",
-                                          GTK_ICON_SIZE_DIALOG,
-                                          NULL);
-  clutter_actor_set_position (tex1,
-                              160 - clutter_actor_get_width (tex1) / 2.0,
-                              120 - clutter_actor_get_height (tex1) / 2.0);
+  gtk_clutter_texture_set_from_stock (GTK_CLUTTER_TEXTURE (tex1),
+                                      clutter1,
+                                      GTK_STOCK_DIALOG_INFO,
+                                      GTK_ICON_SIZE_DIALOG,
+                                      NULL);
+  clutter_actor_set_anchor_point (tex1,
+                                  clutter_actor_get_width (tex1) / 2,
+                                  clutter_actor_get_height (tex1) / 2);
+  clutter_actor_set_position (tex1, 160, 120);
   clutter_actor_add_child (stage1, tex1); 
   clutter_actor_show (tex1);
 
@@ -62,10 +74,17 @@ main (int argc, char *argv[])
                                           "user-info",
                                           GTK_ICON_SIZE_BUTTON,
                                           NULL);
-  clutter_actor_add_constraint (tex2, clutter_align_constraint_new (stage2, CLUTTER_ALIGN_BOTH, .5));
+  clutter_actor_set_anchor_point (tex2,
+                                  clutter_actor_get_width (tex2) / 2,
+                                  clutter_actor_get_height (tex2) / 2);
+  clutter_actor_set_position (tex2, 160, 60);
   clutter_actor_add_child (stage2, tex2);
 
   gtk_container_add (GTK_CONTAINER (vbox), clutter2);
+
+  g_signal_connect (stage2, "allocation-changed",
+                    G_CALLBACK (on_stage2_allocation_changed),
+                    tex2);
 
   gtk_widget_show_all (window);
 

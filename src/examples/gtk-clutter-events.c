@@ -3,10 +3,6 @@
 
 #include <clutter-gtk/clutter-gtk.h>
 
-#ifndef EXAMPLES_DATADIR
-#define EXAMPLES_DATADIR "."
-#endif
-
 typedef struct {
 
   GtkWidget    *window;
@@ -46,22 +42,31 @@ on_gtk_entry_changed (GtkEditable *editable, EventApp *app)
 static void
 on_x_changed (GtkSpinButton *button, EventApp *app)
 {
-  clutter_actor_set_rotation_angle (app->hand, CLUTTER_X_AXIS,
-                                    gtk_spin_button_get_value (button));
+  clutter_actor_set_rotation (app->hand, CLUTTER_X_AXIS,
+                              gtk_spin_button_get_value (button),
+                              0,
+                              clutter_actor_get_height (app->hand) / 2,
+                              0);
 }
 
 static void
 on_y_changed (GtkSpinButton *button, EventApp *app)
 {
-  clutter_actor_set_rotation_angle (app->hand, CLUTTER_Y_AXIS,
-                                    gtk_spin_button_get_value (button));
+  clutter_actor_set_rotation (app->hand, CLUTTER_Y_AXIS,
+                              gtk_spin_button_get_value (button),
+                              clutter_actor_get_width (app->hand) / 2,
+                              0,
+                              0);
 }
 
 static void
 on_z_changed (GtkSpinButton *button, EventApp *app)
 {
-  clutter_actor_set_rotation_angle (app->hand, CLUTTER_Z_AXIS,
-                                    gtk_spin_button_get_value (button));
+  clutter_actor_set_rotation (app->hand, CLUTTER_Z_AXIS,
+                              gtk_spin_button_get_value (button),
+                              clutter_actor_get_width (app->hand) / 2,
+                              clutter_actor_get_height (app->hand) / 2,
+                              0);
 }
 
 static void
@@ -141,7 +146,6 @@ main (gint argc, gchar **argv)
   GtkWidget     *widget, *vbox, *hbox, *button, *label, *box;
   ClutterActor  *actor;
   GdkPixbuf     *pixbuf = NULL;
-  GtkSizeGroup  *size_group;
 
   if (gtk_clutter_init_with_args (&argc, &argv, "- Event test", NULL, NULL, NULL) != CLUTTER_INIT_SUCCESS)
     g_error ("Unable to initialize GtkClutter");
@@ -185,15 +189,17 @@ main (gint argc, gchar **argv)
                     NULL);
 
   /* Create the main texture that the spin buttons manipulate */
-  pixbuf = gdk_pixbuf_new_from_file (EXAMPLES_DATADIR G_DIR_SEPARATOR_S "redhand.png", NULL);
+  pixbuf = gdk_pixbuf_new_from_file ("redhand.png", NULL);
   if (pixbuf == NULL)
     g_error ("Unable to load pixbuf\n");
 
   app->hand = actor = gtk_clutter_texture_new ();
   gtk_clutter_texture_set_from_pixbuf (GTK_CLUTTER_TEXTURE (actor), pixbuf, NULL);
   clutter_actor_add_child (app->stage, actor);
-  clutter_actor_set_pivot_point (actor, 0.5, 0.5);
-  clutter_actor_add_constraint (actor, clutter_align_constraint_new (app->stage, CLUTTER_ALIGN_BOTH, 0.5));
+  clutter_actor_set_anchor_point_from_gravity (actor, CLUTTER_GRAVITY_CENTER);
+  clutter_actor_set_position (actor,
+                              clutter_actor_get_width (app->stage) / 2,
+                              clutter_actor_get_height (app->stage) / 2);
   clutter_actor_set_reactive (actor, TRUE);
   clutter_actor_set_name (actor, "Red Hand");
   g_signal_connect (actor, "button-press-event",
@@ -208,14 +214,12 @@ main (gint argc, gchar **argv)
   clutter_actor_set_size (actor, 500, 20);
 
   /* Create our adjustment widgets */
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
   label = gtk_label_new ("Rotate x-axis");
-  gtk_size_group_add_widget (size_group, label);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
   button = gtk_spin_button_new_with_range (0, 360, 1);
   gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);
@@ -225,7 +229,6 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
   label = gtk_label_new ("Rotate y-axis");
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-  gtk_size_group_add_widget (size_group, label);
   button = gtk_spin_button_new_with_range (0, 360, 1);
   gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);
   g_signal_connect (button, "value-changed", G_CALLBACK (on_y_changed), app);
@@ -234,7 +237,6 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
   label = gtk_label_new ("Rotate z-axis");
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-  gtk_size_group_add_widget (size_group, label);
   button = gtk_spin_button_new_with_range (0, 360, 1);
   gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);
   g_signal_connect (button, "value-changed", G_CALLBACK (on_z_changed), app);
@@ -243,7 +245,6 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
   label = gtk_label_new ("Adjust opacity");
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-  gtk_size_group_add_widget (size_group, label);
   button = gtk_spin_button_new_with_range (0, 255, 1);
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (button), 255);
   gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);

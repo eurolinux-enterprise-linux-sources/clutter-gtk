@@ -34,7 +34,9 @@
  * gtk_clutter_window_get_stage().
  */
 
+#ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
 
 #include "gtk-clutter-window.h"
 #include "gtk-clutter-actor.h"
@@ -257,11 +259,15 @@ gtk_clutter_window_init (GtkClutterWindow *self)
 
   self->priv = priv = GTK_CLUTTER_WINDOW_GET_PRIVATE (self);
 
+  gtk_widget_push_composite_child ();
+
   priv->embed = gtk_clutter_embed_new ();
-  gtk_widget_set_name (priv->embed, "GtkClutterEmbed");
+  gtk_widget_set_composite_name (priv->embed, "GtkClutterEmbed");
 
   GTK_CONTAINER_CLASS (gtk_clutter_window_parent_class)->add (GTK_CONTAINER (self), priv->embed);
   gtk_widget_show (priv->embed);
+
+  gtk_widget_pop_composite_child ();
 
   stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (priv->embed));
 

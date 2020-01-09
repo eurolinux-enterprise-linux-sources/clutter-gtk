@@ -1,23 +1,19 @@
-%global         clutter_version 1.23.7
-%global         gtk3_version 3.21.0
-
-%global         api_ver 1.0
+%define         clutter_version 1.0
 
 Name:           clutter-gtk
-Version:        1.8.4
-Release:        1%{?dist}
+Version:        1.4.4
+Release:        5%{?dist}
 Summary:        A basic GTK clutter widget
 
+Group:          Development/Languages
 License:        LGPLv2+
 URL:            http://www.clutter-project.org
-Source0:        http://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/%{name}/1.4/%{name}-%{version}.tar.xz
+Patch0:         clutter-gtk-fixdso.patch
 
-BuildRequires:  clutter-devel >= %{clutter_version}
-BuildRequires:  gtk3-devel >= %{gtk3_version}
+BuildRequires:  gtk3-devel >= 3.0.0
+BuildRequires:  clutter-devel >= 1.9
 BuildRequires:  gobject-introspection-devel
-
-Requires:       clutter%{?_isa} >= %{clutter_version}
-Requires:       gtk3%{?_isa} >= %{gtk3_version}
 
 %description
 clutter-gtk is a library which allows the embedding of a Clutter
@@ -26,7 +22,9 @@ GTK+ widgets inside the stage.
 
 %package devel
 Summary:        Clutter-gtk development environment
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+Requires:       gtk3-devel clutter-devel
 
 %description devel
 Header files and libraries for building a extension library for the
@@ -43,51 +41,29 @@ make %{?_smp_mflags} V=1
 
 
 %install
-%make_install
+make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p"
 
 #Remove libtool archives.
-find %{buildroot} -type f -name "*.la" -delete
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 %find_lang cluttergtk-1.0
-
-%check
-make check %{?_smp_mflags} V=1
-
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files -f cluttergtk-1.0.lang
-%license COPYING
-%doc NEWS
+%doc COPYING NEWS
 %{_libdir}/*.so.*
-%{_libdir}/girepository-1.0/GtkClutter-%{api_ver}.typelib
+%{_libdir}/girepository-1.0/GtkClutter-%{clutter_version}.typelib
 
 %files devel
-%{_includedir}/clutter-gtk-%{api_ver}/
-%{_libdir}/pkgconfig/clutter-gtk-%{api_ver}.pc
+%{_includedir}/clutter-gtk-%{clutter_version}/
+%{_libdir}/pkgconfig/clutter-gtk-%{clutter_version}.pc
 %{_libdir}/*.so
-%{_datadir}/gir-1.0/GtkClutter-%{api_ver}.gir
+%{_datadir}/gir-1.0/GtkClutter-%{clutter_version}.gir
 %{_datadir}/gtk-doc/html/clutter-gtk-1.0
 
 %changelog
-* Wed Aug 09 2017 Kalev Lember <klember@redhat.com> - 1.8.4-1
-- Update to 1.8.4
-- Enable wayland support
-- Resolves: #1488580
-
-* Wed Oct 19 2016 Kalev Lember <klember@redhat.com> - 1.8.2-1
-- Update to 1.8.2
-- Resolves: #1386834
-
-* Fri May 22 2015 Florian Müllner <fmuellner@redhat.com> - 1.4.4-7
-- Drop obsolete (and unapplied) patch
-  Resolves: #1174510
-
-* Thu Mar 19 2015 Richard Hughes <rhughes@redhat.com> - 1.4.4-6
-- Rebuild against the new cogl
-- Resolves: #1174510
-
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.4.4-5
 - Mass rebuild 2014-01-24
 

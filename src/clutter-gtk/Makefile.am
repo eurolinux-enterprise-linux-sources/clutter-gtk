@@ -6,14 +6,13 @@ CLEANFILES =
 DISTCLEANFILES =
 EXTRA_DIST =
 
+INCLUDES = -I$(srcdir) -I$(top_srcdir) -I$(top_builddir)
 
 AM_CPPFLAGS = \
-	-I$(top_srcdir) -I$(top_builddir) \
 	-DG_LOG_DOMAIN=\"Clutter-Gtk\" 		\
 	-DPREFIX=\""$(prefix)"\" 		\
 	-DLIBDIR=\""$(libdir)"\"		\
 	-DCLUTTER_GTK_COMPILATION		\
-	$(CLUTTER_GTK_HIDDEN_VISIBILITY_CFLAGS)	\
 	$(CLUTTER_GTK_DEPRECATED_CFLAGS)	\
 	$(CLUTTER_GTK_DEBUG_CFLAGS) 		\
 	$(NULL)
@@ -23,39 +22,41 @@ AM_CFLAGS = $(MAINTAINER_CFLAGS) $(CLUTTER_GTK_DEPS_CFLAGS)
 lib_LTLIBRARIES = libclutter-gtk-@CLUTTER_GTK_API_VERSION@.la
 
 source_c = \
-	gtk-clutter-actor.c 	\
-	gtk-clutter-embed.c 	\
-	gtk-clutter-offscreen.c	\
-	gtk-clutter-texture.c	\
-	gtk-clutter-util.c 	\
-	gtk-clutter-window.c	\
-	$()
+	$(srcdir)/gtk-clutter-actor.c 		\
+	$(srcdir)/gtk-clutter-embed.c 		\
+	$(srcdir)/gtk-clutter-offscreen.c	\
+	$(srcdir)/gtk-clutter-texture.c		\
+	$(srcdir)/gtk-clutter-util.c 		\
+	$(srcdir)/gtk-clutter-window.c		\
+	$(NULL)
 
 source_h_public = \
-	gtk-clutter-actor.h 	\
-	gtk-clutter-embed.h 	\
-	gtk-clutter-texture.h	\
-	gtk-clutter-util.h 	\
-	gtk-clutter-window.h	\
-	$()
+	$(srcdir)/gtk-clutter-actor.h 	\
+	$(srcdir)/gtk-clutter-embed.h 	\
+	$(srcdir)/gtk-clutter-texture.h	\
+	$(srcdir)/gtk-clutter-util.h 	\
+	$(srcdir)/gtk-clutter-window.h	\
+	$(NULL)
 
 source_h_private = \
-	gtk-clutter-offscreen.h		\
-	gtk-clutter-actor-internal.h	\
-	$()
+	$(srcdir)/gtk-clutter-offscreen.h	\
+	$(srcdir)/gtk-clutter-actor-internal.h	\
+	$(NULL)
 
 # please, keep the list sorted alphabetically
 libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_SOURCES = $(source_c) $(source_h) $(source_h_private)
 libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LIBADD  = $(CLUTTER_GTK_DEPS_LIBS) $(LIBM)
-libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LDFLAGS = $(CLUTTER_GTK_LT_LDFLAGS)
+libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LDFLAGS = \
+	$(CLUTTER_LT_LDFLAGS) \
+	-export-symbols-regex "^gtk_clutter.*"
 
 cluttergtkheadersdir = $(includedir)/clutter-gtk-@CLUTTER_GTK_API_VERSION@/clutter-gtk
 
 # please, keep the list sorted alphabetically
 cluttergtkheaders_HEADERS = \
-	clutter-gtk.h 		\
-	gtk-clutter-version.h	\
-	$(source_h_public)	\
+	$(top_srcdir)/clutter-gtk/clutter-gtk.h 		\
+	$(top_builddir)/clutter-gtk/gtk-clutter-version.h	\
+	$(source_h_public)					\
 	$(NULL)
 
 EXTRA_DIST += gtk-clutter-version.h.in

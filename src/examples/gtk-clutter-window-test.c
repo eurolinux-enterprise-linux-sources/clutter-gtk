@@ -58,10 +58,7 @@ add_toolbar_items (GtkToolbar *toolbar,
     for (stock_id = (char *) first; stock_id != NULL;
          stock_id = va_arg (var_args, char *))
     {
-        GtkToolItem *item = g_object_new (GTK_TYPE_TOOL_BUTTON,
-                                          "icon-name", stock_id,
-                                          "label", NULL,
-                                          NULL);
+        GtkToolItem *item = gtk_tool_button_new_from_stock (stock_id);
         gtk_toolbar_insert (toolbar, item, -1);
     }
 
@@ -139,11 +136,12 @@ main (int argc, char **argv)
 
     toolbar = gtk_toolbar_new ();
     add_toolbar_items (GTK_TOOLBAR (toolbar),
-                       "list-add",
-                       "format-text-bold",
-                       "format-text-italic",
-                       "media-optical",
-                       "edit-copy",
+                       GTK_STOCK_ADD,
+                       GTK_STOCK_BOLD,
+                       GTK_STOCK_ITALIC,
+                       GTK_STOCK_CANCEL,
+                       GTK_STOCK_CDROM,
+                       GTK_STOCK_CONVERT,
                        NULL);
 
     gtk_widget_show_all (toolbar);

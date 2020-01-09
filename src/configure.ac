@@ -2,12 +2,12 @@
 # An odd micro number indicates in-progress development, (eg. from git)
 # An even micro number indicates a released version.
 m4_define([clutter_gtk_major], [1])
-m4_define([clutter_gtk_minor], [8])
+m4_define([clutter_gtk_minor], [4])
 m4_define([clutter_gtk_micro], [4])
 m4_define([clutter_gtk_version], [clutter_gtk_major.clutter_gtk_minor.clutter_gtk_micro])
 
 # increase the interface age for each release; if the API changes, set to 0
-m4_define([clutter_gtk_interface_age], [4])
+m4_define([clutter_gtk_interface_age], [1])
 m4_define([clutter_gtk_binary_age], [m4_eval(100 * clutter_gtk_minor + clutter_gtk_micro)])
 
 m4_define([clutter_gtk_release_status],
@@ -30,7 +30,7 @@ AC_CONFIG_SRCDIR([clutter-gtk/clutter-gtk.h])
 AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([build/autotools])
 
-AM_INIT_AUTOMAKE([1.14 subdir-objects foreign -Wno-portability no-define no-dist-gzip dist-xz tar-ustar])
+AM_INIT_AUTOMAKE([1.11 foreign -Wno-portability no-define no-dist-gzip dist-xz tar-ustar])
 
 AM_SILENT_RULES([yes])
 
@@ -56,7 +56,7 @@ AC_MSG_CHECKING([if building for some Win32 platform])
 AS_CASE([$host],
         [*-*-mingw*|*-*-cygwin*],
         [
-          CLUTTER_GTK_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
+          CLUTTER_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
           platform_win32=yes
         ],
 
@@ -82,42 +82,12 @@ AC_HEADER_STDC
 AC_CHECK_LIBM
 AC_SUBST(LIBM)
 
-m4_define([clutter_req_version], [1.23.7])
-m4_define([gtk_req_version], [3.21.0])
+m4_define([clutter_req_version], [1.13.7])
+m4_define([gtk_req_version], [3.6.0])
 
 PKG_CHECK_MODULES([CLUTTER_GTK_DEPS], [clutter-1.0 >= clutter_req_version gtk+-3.0 >= gtk_req_version])
 AC_SUBST([CLUTTER_GTK_DEPS_CFLAGS])
 AC_SUBST([CLUTTER_GTK_DEPS_LIBS])
-
-CLUTTER_GTK_HIDDEN_VISIBILITY_CFLAGS=""
-case "$host" in
-  *-*-mingw*)
-    dnl on mingw32 we do -fvisibility=hidden and __declspec(dllexport)
-    AC_DEFINE([CLUTTER_GTK_EXTERN], [__attribute__((visibility("default"))) __declspec(dllexport) extern],
-              [defines how to decorate public symbols while building])
-    CFLAGS="${CFLAGS} -fvisibility=hidden"
-    ;;
-  *)
-    dnl on other compilers, check if we can do -fvisibility=hidden
-    SAVED_CFLAGS="${CFLAGS}"
-    CFLAGS="-fvisibility=hidden"
-    AC_MSG_CHECKING([for -fvisibility=hidden compiler flag])
-    AC_TRY_COMPILE([], [return 0],
-                   AC_MSG_RESULT(yes)
-                   enable_fvisibility_hidden=yes,
-                   AC_MSG_RESULT(no)
-                   enable_fvisibility_hidden=no)
-    CFLAGS="${SAVED_CFLAGS}"
-
-    AS_IF([test "${enable_fvisibility_hidden}" = "yes"], [
-      AC_DEFINE([CLUTTER_GTK_EXTERN], [__attribute__((visibility("default"))) extern],
-                [defines how to decorate public symbols while building])
-      CLUTTER_GTK_HIDDEN_VISIBILITY_CFLAGS="-fvisibility=hidden"
-    ])
-    ;;
-esac
-AC_SUBST(CLUTTER_GTK_HIDDEN_VISIBILITY_CFLAGS)
-
 
 m4_define([deprecated_default],
           [m4_if(m4_eval(clutter_gtk_minor % 2), [1],
@@ -213,6 +183,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,
                    "$GETTEXT_PACKAGE",
                    [The prefix for our gettext translation domains.])
+AS_ALL_LINGUAS
 
 dnl = GTK Doc check ========================================================
 
@@ -227,9 +198,9 @@ AC_SUBST(GTK_PREFIX)
 AC_SUBST(GDK_PIXBUF_PREFIX)
 AC_SUBST(CLUTTER_PREFIX)
 
-GTK_DOC_CHECK([1.24], [--flavour=no-tmpl])
+GTK_DOC_CHECK([1.14], [--flavour=no-tmpl])
 
-GOBJECT_INTROSPECTION_CHECK([1.32])
+GOBJECT_INTROSPECTION_CHECK([0.9.12])
 
 AC_CONFIG_FILES([
         Makefile
@@ -240,6 +211,8 @@ AC_CONFIG_FILES([
         clutter-gtk/gtk-clutter-version.h
         
         doc/Makefile
+        doc/reference/Makefile
+        doc/reference/version.xml
 
         examples/Makefile
 
