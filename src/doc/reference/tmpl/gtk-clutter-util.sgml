@@ -1,0 +1,216 @@
+<!-- ##### SECTION Title ##### -->
+Utility Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM ClutterGtkInitError ##### -->
+<para>
+
+</para>
+
+@CLUTTER_INIT_ERROR_LAST: 
+@CLUTTER_INIT_ERROR_GTK: 
+
+<!-- ##### FUNCTION gtk_clutter_init ##### -->
+<para>
+
+</para>
+
+@argc: 
+@argv: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_init_with_args ##### -->
+<para>
+
+</para>
+
+@argc: 
+@argv: 
+@parameter_string: 
+@entries: 
+@translation_domain: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_fg_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_bg_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_text_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_base_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_text_aa_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_light_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_mid_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### FUNCTION gtk_clutter_get_dark_color ##### -->
+<para>
+
+</para>
+
+@widget: 
+@state: 
+@color: 
+
+
+<!-- ##### ENUM ClutterGtkTextureError ##### -->
+<para>
+
+</para>
+
+@CLUTTER_GTK_TEXTURE_INVALID_STOCK_ID: 
+@CLUTTER_GTK_TEXTURE_ERROR_LAST: 
+
+<!-- ##### MACRO CLUTTER_GTK_TEXTURE_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_new_from_pixbuf ##### -->
+<para>
+
+</para>
+
+@pixbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_new_from_stock ##### -->
+<para>
+
+</para>
+
+@widget: 
+@stock_id: 
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_new_from_icon_name ##### -->
+<para>
+
+</para>
+
+@widget: 
+@icon_name: 
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_set_from_pixbuf ##### -->
+<para>
+
+</para>
+
+@texture: 
+@pixbuf: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_set_from_stock ##### -->
+<para>
+
+</para>
+
+@texture: 
+@widget: 
+@stock_id: 
+@size: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_texture_set_from_icon_name ##### -->
+<para>
+
+</para>
+
+@texture: 
+@widget: 
+@icon_name: 
+@size: 
+@error: 
+@Returns: 
+
+

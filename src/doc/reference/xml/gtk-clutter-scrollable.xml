@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<refentry id="GtkClutterScrollable">
+<refmeta>
+<refentrytitle role="top_of_page" id="GtkClutterScrollable.top_of_page">GtkClutterScrollable</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>CLUTTER-GTK Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GtkClutterScrollable</refname>
+<refpurpose>Interface for scrollable actors</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="GtkClutterScrollable.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+                    <link linkend="GtkClutterScrollable-struct">GtkClutterScrollable</link>;
+                    <link linkend="GtkClutterScrollableIface">GtkClutterScrollableIface</link>;
+<link linkend="void">void</link>                <link linkend="gtk-clutter-scrollable-set-adjustments">gtk_clutter_scrollable_set_adjustments</link>
+                                                        (<link linkend="GtkClutterScrollable">GtkClutterScrollable</link> *scrollable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *v_adjust);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-scrollable-get-adjustments">gtk_clutter_scrollable_get_adjustments</link>
+                                                        (<link linkend="GtkClutterScrollable">GtkClutterScrollable</link> *scrollable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> **h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> **v_adjust);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="GtkClutterScrollable.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----GtkClutterScrollable
+</synopsis>
+</refsect1>
+
+
+
+
+<refsect1 id="GtkClutterScrollable.implementations" role="implementations">
+<title role="implementations.title">Known Implementations</title>
+<para>
+GtkClutterScrollable is implemented by
+ <link linkend="GtkClutterViewport">GtkClutterViewport</link>.</para>
+</refsect1>
+
+<refsect1 id="GtkClutterScrollable.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="GtkClutterScrollable--hadjustment">hadjustment</link>&quot;              <link linkend="GtkAdjustment">GtkAdjustment</link>*        : Read / Write / Construct
+  &quot;<link linkend="GtkClutterScrollable--vadjustment">vadjustment</link>&quot;              <link linkend="GtkAdjustment">GtkAdjustment</link>*        : Read / Write / Construct
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="GtkClutterScrollable.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+<link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link> is an interface for scrollable actors, reusing
+the <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link> objects from GTK+ do drive the scrolling.
+</para>
+<para>
+<link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link> is available since Clutter-GTK 0.10</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="GtkClutterScrollable.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GtkClutterScrollable-struct" role="struct">
+<title>GtkClutterScrollable</title>
+<indexterm zone="GtkClutterScrollable-struct"><primary>GtkClutterScrollable</primary></indexterm><programlisting>typedef struct _GtkClutterScrollable GtkClutterScrollable;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GtkClutterScrollableIface" role="struct" condition="since:0.10">
+<title>GtkClutterScrollableIface</title>
+<indexterm zone="GtkClutterScrollableIface" role="0.10"><primary>GtkClutterScrollableIface</primary></indexterm><programlisting>typedef struct {
+  void (* set_adjustments) (GtkClutterScrollable  *scrollable,
+                            GtkAdjustment         *h_adjust,
+                            GtkAdjustment         *v_adjust);
+  void (* get_adjustments) (GtkClutterScrollable  *scrollable,
+                            GtkAdjustment        **h_adjust,
+                            GtkAdjustment        **v_adjust);
+} GtkClutterScrollableIface;
+</programlisting>
+<para>
+The <link linkend="GtkClutterScrollableIface"><type>GtkClutterScrollableIface</type></link> structure contains only private data
+and should be accessed using the provided functions.</para>
+<para>
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>set_adjustments</structfield>&#160;()</term>
+<listitem><simpara> virtual function for setting the horizontal
+  and vertical adjustments of a <link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link>
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_adjustments</structfield>&#160;()</term>
+<listitem><simpara> virtual function for retrieving the horizontal
+  and vertical adjustments of a <link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link>
+</simpara></listitem>
+</varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+<refsect2 id="gtk-clutter-scrollable-set-adjustments" role="function" condition="since:0.10">
+<title>gtk_clutter_scrollable_set_adjustments ()</title>
+<indexterm zone="gtk-clutter-scrollable-set-adjustments" role="0.10"><primary sortas="scrollable_set_adjustments">gtk_clutter_scrollable_set_adjustments</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_scrollable_set_adjustments
+                                                        (<link linkend="GtkClutterScrollable">GtkClutterScrollable</link> *scrollable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *v_adjust);</programlisting>
+<para>
+Sets the horizontal and vertical adjustments used to determine
+the position of the scrollable actor.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>scrollable</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>h_adjust</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>v_adjust</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+<refsect2 id="gtk-clutter-scrollable-get-adjustments" role="function" condition="since:0.10">
+<title>gtk_clutter_scrollable_get_adjustments ()</title>
+<indexterm zone="gtk-clutter-scrollable-get-adjustments" role="0.10"><primary sortas="scrollable_get_adjustments">gtk_clutter_scrollable_get_adjustments</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_scrollable_get_adjustments
+                                                        (<link linkend="GtkClutterScrollable">GtkClutterScrollable</link> *scrollable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> **h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> **v_adjust);</programlisting>
+<para>
+Retrieves the horizontal and vertical adjustments used to
+determine the position of the scrollable actor.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>scrollable</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>h_adjust</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>v_adjust</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+
+</refsect1>
+<refsect1 id="GtkClutterScrollable.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="GtkClutterScrollable--hadjustment" role="property"><title>The <literal>&quot;hadjustment&quot;</literal> property</title>
+<indexterm zone="GtkClutterScrollable--hadjustment" role="0.10"><primary>GtkClutterScrollable:hadjustment</primary></indexterm><programlisting>  &quot;hadjustment&quot;              <link linkend="GtkAdjustment">GtkAdjustment</link>*        : Read / Write / Construct</programlisting>
+<para>
+The <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link> that determines the value of the
+horizontal position for this scrollable actor.</para>
+<para>
+</para><para>Since 0.10</para>
+</refsect2>
+<refsect2 id="GtkClutterScrollable--vadjustment" role="property"><title>The <literal>&quot;vadjustment&quot;</literal> property</title>
+<indexterm zone="GtkClutterScrollable--vadjustment" role="0.10"><primary>GtkClutterScrollable:vadjustment</primary></indexterm><programlisting>  &quot;vadjustment&quot;              <link linkend="GtkAdjustment">GtkAdjustment</link>*        : Read / Write / Construct</programlisting>
+<para>
+The <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link> that determines the value of the
+vertical position for this scrollable actor.</para>
+<para>
+</para><para>Since 0.10</para>
+</refsect2>
+</refsect1>
+
+
+
+
+</refentry>

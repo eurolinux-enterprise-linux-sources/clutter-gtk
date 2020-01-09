@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<refentry id="GtkClutterViewport">
+<refmeta>
+<refentrytitle role="top_of_page" id="GtkClutterViewport.top_of_page">GtkClutterViewport</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>CLUTTER-GTK Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GtkClutterViewport</refname>
+<refpurpose>A scrollable actor</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="GtkClutterViewport.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+                    <link linkend="GtkClutterViewport-struct">GtkClutterViewport</link>;
+                    <link linkend="GtkClutterViewportClass">GtkClutterViewportClass</link>;
+<link linkend="ClutterActor">ClutterActor</link> *      <link linkend="gtk-clutter-viewport-new">gtk_clutter_viewport_new</link>            (<link linkend="GtkAdjustment">GtkAdjustment</link> *h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *v_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *z_adjust);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-viewport-get-origin">gtk_clutter_viewport_get_origin</link>     (<link linkend="GtkClutterViewport">GtkClutterViewport</link> *viewport,
+                                                         <link linkend="gfloat">gfloat</link> *x,
+                                                         <link linkend="gfloat">gfloat</link> *y,
+                                                         <link linkend="gfloat">gfloat</link> *z);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="GtkClutterViewport.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="ClutterActor">ClutterActor</link>
+               +----GtkClutterViewport
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="GtkClutterViewport.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+GtkClutterViewport implements
+ <link linkend="GtkClutterZoomable">GtkClutterZoomable</link>,  <link linkend="GtkClutterScrollable">GtkClutterScrollable</link>,  <link linkend="ClutterScriptable">ClutterScriptable</link> and  <link linkend="ClutterContainer">ClutterContainer</link>.</para>
+</refsect1>
+
+
+<refsect1 id="GtkClutterViewport.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="GtkClutterViewport--child">child</link>&quot;                    <link linkend="ClutterActor">ClutterActor</link>*         : Read / Write
+  &quot;<link linkend="GtkClutterViewport--origin">origin</link>&quot;                   <link linkend="ClutterVertex">ClutterVertex</link>*        : Read
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="GtkClutterViewport.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+<link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link> is a scrollable actor that can contain a single
+<link linkend="ClutterActor"><type>ClutterActor</type></link>. Using two <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link><!-- -->s it is possible to
+control the visible area of the child actor if the size of the viewport
+is smaller than the size of the child.
+</para>
+<para>
+The <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link><!-- -->s used to control the horizontal and
+vertical scrolling can be attached to a <link linkend="GtkScrollbar"><type>GtkScrollbar</type></link> subclass,
+like <link linkend="GtkHScrollbar"><type>GtkHScrollbar</type></link> or <link linkend="GtkVScrollbar"><type>GtkVScrollbar</type></link>.
+</para>
+<para>
+The <link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link> can be used inside any <link linkend="ClutterContainer"><type>ClutterContainer</type></link>
+implementation.
+</para>
+<para>
+<link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link> is available since Clutter-GTK 0.10</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="GtkClutterViewport.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GtkClutterViewport-struct" role="struct">
+<title>GtkClutterViewport</title>
+<indexterm zone="GtkClutterViewport-struct" role="0.8.2"><primary>GtkClutterViewport</primary></indexterm><programlisting>typedef struct _GtkClutterViewport GtkClutterViewport;</programlisting>
+<para>
+The <link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link> structure contains only private data and
+should be accessed using the provided functions.</para>
+<para>
+</para><para role="since">Since 0.8.2</para></refsect2>
+<refsect2 id="GtkClutterViewportClass" role="struct" condition="since:0.8.2">
+<title>GtkClutterViewportClass</title>
+<indexterm zone="GtkClutterViewportClass" role="0.8.2"><primary>GtkClutterViewportClass</primary></indexterm><programlisting>typedef struct {
+} GtkClutterViewportClass;
+</programlisting>
+<para>
+The <link linkend="GtkClutterViewportClass"><type>GtkClutterViewportClass</type></link> structure contains only private data and
+should be accessed using the provided functions.</para>
+<para>
+</para><para role="since">Since 0.8.2</para></refsect2>
+<refsect2 id="gtk-clutter-viewport-new" role="function" condition="since:0.10">
+<title>gtk_clutter_viewport_new ()</title>
+<indexterm zone="gtk-clutter-viewport-new" role="0.10"><primary sortas="viewport_new">gtk_clutter_viewport_new</primary></indexterm><programlisting><link linkend="ClutterActor">ClutterActor</link> *      gtk_clutter_viewport_new            (<link linkend="GtkAdjustment">GtkAdjustment</link> *h_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *v_adjust,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *z_adjust);</programlisting>
+<para>
+Creates a new <link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link> with the given adjustments.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>h_adjust</parameter>&#160;:</term>
+<listitem><simpara> horizontal adjustment, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>v_adjust</parameter>&#160;:</term>
+<listitem><simpara> vertical adjustment, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>z_adjust</parameter>&#160;:</term>
+<listitem><simpara> zoom adjustment, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the newly created viewport actor
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+<refsect2 id="gtk-clutter-viewport-get-origin" role="function" condition="since:0.10">
+<title>gtk_clutter_viewport_get_origin ()</title>
+<indexterm zone="gtk-clutter-viewport-get-origin" role="0.10"><primary sortas="viewport_get_origin">gtk_clutter_viewport_get_origin</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_viewport_get_origin     (<link linkend="GtkClutterViewport">GtkClutterViewport</link> *viewport,
+                                                         <link linkend="gfloat">gfloat</link> *x,
+                                                         <link linkend="gfloat">gfloat</link> *y,
+                                                         <link linkend="gfloat">gfloat</link> *z);</programlisting>
+<para>
+Retrieves the current translation factor ("origin") used when
+displaying the child of <parameter>viewport</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>viewport</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterViewport"><type>GtkClutterViewport</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>x</parameter>&#160;:</term>
+<listitem><simpara> return location for the X origin in pixels, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara> return location for the Y origin in pixels, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>z</parameter>&#160;:</term>
+<listitem><simpara> return location for the Z origin in pixels, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+
+</refsect1>
+<refsect1 id="GtkClutterViewport.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="GtkClutterViewport--child" role="property"><title>The <literal>&quot;child&quot;</literal> property</title>
+<indexterm zone="GtkClutterViewport--child" role="0.10"><primary>GtkClutterViewport:child</primary></indexterm><programlisting>  &quot;child&quot;                    <link linkend="ClutterActor">ClutterActor</link>*         : Read / Write</programlisting>
+<para>
+The <link linkend="ClutterActor"><type>ClutterActor</type></link> inside the viewport.</para>
+<para>
+</para><para>Since 0.10</para>
+</refsect2>
+<refsect2 id="GtkClutterViewport--origin" role="property"><title>The <literal>&quot;origin&quot;</literal> property</title>
+<indexterm zone="GtkClutterViewport--origin" role="0.10"><primary>GtkClutterViewport:origin</primary></indexterm><programlisting>  &quot;origin&quot;                   <link linkend="ClutterVertex">ClutterVertex</link>*        : Read</programlisting>
+<para>
+The current origin of the viewport. You should use the
+vertex to convert event coordinates for the child of the
+viewport.</para>
+<para>
+</para><para>Since 0.10</para>
+</refsect2>
+</refsect1>
+
+
+
+
+</refentry>

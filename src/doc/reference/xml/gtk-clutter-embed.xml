@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<refentry id="GtkClutterEmbed">
+<refmeta>
+<refentrytitle role="top_of_page" id="GtkClutterEmbed.top_of_page">GtkClutterEmbed</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>CLUTTER-GTK Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GtkClutterEmbed</refname>
+<refpurpose>Widget for embedding a Clutter scene</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="GtkClutterEmbed.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+                    <link linkend="GtkClutterEmbed-struct">GtkClutterEmbed</link>;
+                    <link linkend="GtkClutterEmbedClass">GtkClutterEmbedClass</link>;
+<link linkend="GtkWidget">GtkWidget</link> *         <link linkend="gtk-clutter-embed-new">gtk_clutter_embed_new</link>               (void);
+<link linkend="ClutterActor">ClutterActor</link> *      <link linkend="gtk-clutter-embed-get-stage">gtk_clutter_embed_get_stage</link>         (<link linkend="GtkClutterEmbed">GtkClutterEmbed</link> *embed);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="GtkClutterEmbed.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----GtkClutterEmbed
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="GtkClutterEmbed.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+GtkClutterEmbed implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkBuildable">GtkBuildable</link>.</para>
+</refsect1>
+
+
+
+
+
+<refsect1 id="GtkClutterEmbed.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+<link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link> is a GTK+ widget embedding a <link linkend="ClutterStage"><type>ClutterStage</type></link>. Using
+a <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link> widget is possible to build, show and interact with
+a scene built using Clutter inside a GTK+ application.
+</para>
+<para>
+<note>To avoid flickering on show, you should call <link linkend="gtk-widget-show"><function>gtk_widget_show()</function></link>
+or <link linkend="gtk-widget-realize"><function>gtk_widget_realize()</function></link> before calling <link linkend="clutter-actor-show"><function>clutter_actor_show()</function></link> on the
+embedded <link linkend="ClutterStage"><type>ClutterStage</type></link> actor. This is needed for Clutter to be able
+to paint on the <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link> widget.</note></para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="GtkClutterEmbed.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GtkClutterEmbed-struct" role="struct">
+<title>GtkClutterEmbed</title>
+<indexterm zone="GtkClutterEmbed-struct" role="0.6"><primary>GtkClutterEmbed</primary></indexterm><programlisting>typedef struct _GtkClutterEmbed GtkClutterEmbed;</programlisting>
+<para>
+A <link linkend="GtkWidget"><type>GtkWidget</type></link> containing the default Clutter stage.</para>
+<para>
+</para><para role="since">Since 0.6</para></refsect2>
+<refsect2 id="GtkClutterEmbedClass" role="struct" condition="since:0.6">
+<title>GtkClutterEmbedClass</title>
+<indexterm zone="GtkClutterEmbedClass" role="0.6"><primary>GtkClutterEmbedClass</primary></indexterm><programlisting>typedef struct {
+} GtkClutterEmbedClass;
+</programlisting>
+<para>
+Base class for <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link>.</para>
+<para>
+</para><para role="since">Since 0.6</para></refsect2>
+<refsect2 id="gtk-clutter-embed-new" role="function" condition="since:0.6">
+<title>gtk_clutter_embed_new ()</title>
+<indexterm zone="gtk-clutter-embed-new" role="0.6"><primary sortas="embed_new">gtk_clutter_embed_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link> *         gtk_clutter_embed_new               (void);</programlisting>
+<para>
+Creates a new <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link> widget. This widget can be
+used to build a scene using Clutter API into a GTK+ application.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the newly created <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link>
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.6</para></refsect2>
+<refsect2 id="gtk-clutter-embed-get-stage" role="function" condition="since:0.6">
+<title>gtk_clutter_embed_get_stage ()</title>
+<indexterm zone="gtk-clutter-embed-get-stage" role="0.6"><primary sortas="embed_get_stage">gtk_clutter_embed_get_stage</primary></indexterm><programlisting><link linkend="ClutterActor">ClutterActor</link> *      gtk_clutter_embed_get_stage         (<link linkend="GtkClutterEmbed">GtkClutterEmbed</link> *embed);</programlisting>
+<para>
+Retrieves the <link linkend="ClutterStage"><type>ClutterStage</type></link> from <parameter>embed</parameter>. The returned stage can be
+used to add actors to the Clutter scene.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>embed</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterEmbed"><type>GtkClutterEmbed</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the Clutter stage. You should never destroy or unref
+  the returned actor.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.6</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

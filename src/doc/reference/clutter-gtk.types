@@ -1,0 +1,5 @@
+#include <clutter-gtk/clutter-gtk.h>
+
+gtk_clutter_embed_get_type
+gtk_clutter_scrollable_get_type
+gtk_clutter_viewport_get_type

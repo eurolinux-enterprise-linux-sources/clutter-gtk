@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<indexdiv>
+<indexdiv><title>E</title>
+<indexentry><primaryie linkends="gtk-clutter-embed-get-stage"><link linkend="gtk-clutter-embed-get-stage">gtk_clutter_embed_get_stage</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gtk-clutter-embed-new"><link linkend="gtk-clutter-embed-new">gtk_clutter_embed_new</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="GtkClutterEmbed-struct"><link linkend="GtkClutterEmbed">GtkClutterEmbed</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GtkClutterEmbedClass"><link linkend="GtkClutterEmbedClass">GtkClutterEmbedClass</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

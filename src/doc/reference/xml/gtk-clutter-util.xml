@@ -1,0 +1,524 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<refentry id="clutter-gtk-Utility-Functions">
+<refmeta>
+<refentrytitle role="top_of_page" id="clutter-gtk-Utility-Functions.top_of_page">Utility Functions</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>CLUTTER-GTK Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Utility Functions</refname>
+<refpurpose>Utility functions for integrating Clutter in GTK+</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="clutter-gtk-Utility-Functions.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+enum                <link linkend="ClutterGtkInitError">ClutterGtkInitError</link>;
+<link linkend="ClutterInitError">ClutterInitError</link>    <link linkend="gtk-clutter-init">gtk_clutter_init</link>                    (<link linkend="int">int</link> *argc,
+                                                         <link linkend="char">char</link> ***argv);
+<link linkend="ClutterInitError">ClutterInitError</link>    <link linkend="gtk-clutter-init-with-args">gtk_clutter_init_with_args</link>          (<link linkend="int">int</link> *argc,
+                                                         <link linkend="char">char</link> ***argv,
+                                                         const <link linkend="char">char</link> *parameter_string,
+                                                         <link linkend="GOptionEntry">GOptionEntry</link> *entries,
+                                                         const <link linkend="char">char</link> *translation_domain,
+                                                         <link linkend="GError">GError</link> **error);
+
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-fg-color">gtk_clutter_get_fg_color</link>            (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-bg-color">gtk_clutter_get_bg_color</link>            (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-text-color">gtk_clutter_get_text_color</link>          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-base-color">gtk_clutter_get_base_color</link>          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-text-aa-color">gtk_clutter_get_text_aa_color</link>       (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-light-color">gtk_clutter_get_light_color</link>         (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-mid-color">gtk_clutter_get_mid_color</link>           (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+<link linkend="void">void</link>                <link linkend="gtk-clutter-get-dark-color">gtk_clutter_get_dark_color</link>          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);
+
+enum                <link linkend="ClutterGtkTextureError">ClutterGtkTextureError</link>;
+#define             <link linkend="CLUTTER-GTK-TEXTURE-ERROR--CAPS">CLUTTER_GTK_TEXTURE_ERROR</link>
+<link linkend="ClutterActor">ClutterActor</link> *      <link linkend="gtk-clutter-texture-new-from-pixbuf">gtk_clutter_texture_new_from_pixbuf</link> (<link linkend="GdkPixbuf">GdkPixbuf</link> *pixbuf);
+<link linkend="ClutterActor">ClutterActor</link> *      <link linkend="gtk-clutter-texture-new-from-stock">gtk_clutter_texture_new_from_stock</link>  (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *stock_id,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size);
+<link linkend="ClutterActor">ClutterActor</link> *      <link linkend="gtk-clutter-texture-new-from-icon-name">gtk_clutter_texture_new_from_icon_name</link>
+                                                        (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *icon_name,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size);
+<link linkend="gboolean">gboolean</link>            <link linkend="gtk-clutter-texture-set-from-pixbuf">gtk_clutter_texture_set_from_pixbuf</link> (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GdkPixbuf">GdkPixbuf</link> *pixbuf,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="gtk-clutter-texture-set-from-stock">gtk_clutter_texture_set_from_stock</link>  (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *stock_id,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="gtk-clutter-texture-set-from-icon-name">gtk_clutter_texture_set_from_icon_name</link>
+                                                        (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *icon_name,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size,
+                                                         <link linkend="GError">GError</link> **error);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="clutter-gtk-Utility-Functions.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+In order to properly integrate a Clutter scene into a GTK+ applications
+a certain degree of state must be retrieved from GTK+ itself.
+</para>
+<para>
+Clutter-GTK provides API for easing the process of synchronizing colors
+with the current GTK+ theme and for loading image sources from <link linkend="GdkPixbuf"><type>GdkPixbuf</type></link>,
+GTK+ stock items and icon themes.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="clutter-gtk-Utility-Functions.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ClutterGtkInitError" role="enum" condition="since:0.8">
+<title>enum ClutterGtkInitError</title>
+<indexterm zone="ClutterGtkInitError" role="0.8"><primary>ClutterGtkInitError</primary></indexterm><programlisting>typedef enum {
+  CLUTTER_INIT_ERROR_LAST = CLUTTER_INIT_ERROR_INTERNAL,
+
+  CLUTTER_INIT_ERROR_GTK  = (CLUTTER_INIT_ERROR_LAST - 1)
+} ClutterGtkInitError;
+</programlisting>
+<para>
+Extension of the <link linkend="ClutterInitError"><type>ClutterInitError</type></link> enumeration for the integration
+with GTK+</para>
+<para>
+</para><variablelist role="enum">
+<varlistentry id="CLUTTER-INIT-ERROR-LAST--CAPS" role="constant">
+<term><literal>CLUTTER_INIT_ERROR_LAST</literal></term>
+<listitem><simpara> Placeholder
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="CLUTTER-INIT-ERROR-GTK--CAPS" role="constant">
+<term><literal>CLUTTER_INIT_ERROR_GTK</literal></term>
+<listitem><simpara> Unable to initialize GTK+
+</simpara></listitem>
+</varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-init" role="function" condition="since:0.8">
+<title>gtk_clutter_init ()</title>
+<indexterm zone="gtk-clutter-init" role="0.8"><primary sortas="init">gtk_clutter_init</primary></indexterm><programlisting><link linkend="ClutterInitError">ClutterInitError</link>    gtk_clutter_init                    (<link linkend="int">int</link> *argc,
+                                                         <link linkend="char">char</link> ***argv);</programlisting>
+<para>
+This function should be called instead of <link linkend="clutter-init"><function>clutter_init()</function></link> and
+<link linkend="gtk-init"><function>gtk_init()</function></link>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>argc</parameter>&#160;:</term>
+<listitem><simpara> pointer to the arguments count, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>argv</parameter>&#160;:</term>
+<listitem><simpara> pointer to the arguments vector, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="CLUTTER-INIT-SUCCESS--CAPS"><literal>CLUTTER_INIT_SUCCESS</literal></link> on success, a negative integer
+  on failure.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-init-with-args" role="function" condition="since:0.10">
+<title>gtk_clutter_init_with_args ()</title>
+<indexterm zone="gtk-clutter-init-with-args" role="0.10"><primary sortas="init_with_args">gtk_clutter_init_with_args</primary></indexterm><programlisting><link linkend="ClutterInitError">ClutterInitError</link>    gtk_clutter_init_with_args          (<link linkend="int">int</link> *argc,
+                                                         <link linkend="char">char</link> ***argv,
+                                                         const <link linkend="char">char</link> *parameter_string,
+                                                         <link linkend="GOptionEntry">GOptionEntry</link> *entries,
+                                                         const <link linkend="char">char</link> *translation_domain,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+This function should be called instead of <link linkend="clutter-init"><function>clutter_init()</function></link> and
+<link linkend="gtk-init-with-args"><function>gtk_init_with_args()</function></link>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>argc</parameter>&#160;:</term>
+<listitem><simpara> a pointer to the number of command line arguments.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>argv</parameter>&#160;:</term>
+<listitem><simpara> a pointer to the array of command line arguments.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parameter_string</parameter>&#160;:</term>
+<listitem><simpara> a string which is displayed in
+   the first line of <option>--help</option> output, after
+   <literal><replaceable>programname</replaceable> [OPTION...]</literal>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>entries</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="NULL--CAPS"><literal>NULL</literal></link>-terminated array of <link linkend="GOptionEntry"><type>GOptionEntry</type></link><!-- -->s
+   describing the options of your program
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>translation_domain</parameter>&#160;:</term>
+<listitem><simpara> a translation domain to use for translating
+   the <option>--help</option> output for the options in <parameter>entries</parameter>
+   with <link linkend="gettext"><function>gettext()</function></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&#160;:</term>
+<listitem><simpara> a return location for errors
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="CLUTTER-INIT-SUCCESS--CAPS"><literal>CLUTTER_INIT_SUCCESS</literal></link> on success, a negative integer
+  on failure.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+<refsect2 id="gtk-clutter-get-fg-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_fg_color ()</title>
+<indexterm zone="gtk-clutter-get-fg-color" role="0.8"><primary sortas="get_fg_color">gtk_clutter_get_fg_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_fg_color            (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the foreground color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies
+it into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-bg-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_bg_color ()</title>
+<indexterm zone="gtk-clutter-get-bg-color" role="0.8"><primary sortas="get_bg_color">gtk_clutter_get_bg_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_bg_color            (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the background color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies
+it into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-text-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_text_color ()</title>
+<indexterm zone="gtk-clutter-get-text-color" role="0.8"><primary sortas="get_text_color">gtk_clutter_get_text_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_text_color          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the text color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-base-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_base_color ()</title>
+<indexterm zone="gtk-clutter-get-base-color" role="0.8"><primary sortas="get_base_color">gtk_clutter_get_base_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_base_color          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the base color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-text-aa-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_text_aa_color ()</title>
+<indexterm zone="gtk-clutter-get-text-aa-color" role="0.8"><primary sortas="get_text_aa_color">gtk_clutter_get_text_aa_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_text_aa_color       (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the text-aa color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-light-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_light_color ()</title>
+<indexterm zone="gtk-clutter-get-light-color" role="0.8"><primary sortas="get_light_color">gtk_clutter_get_light_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_light_color         (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the light color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-mid-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_mid_color ()</title>
+<indexterm zone="gtk-clutter-get-mid-color" role="0.8"><primary sortas="get_mid_color">gtk_clutter_get_mid_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_mid_color           (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the mid color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-get-dark-color" role="function" condition="since:0.8">
+<title>gtk_clutter_get_dark_color ()</title>
+<indexterm zone="gtk-clutter-get-dark-color" role="0.8"><primary sortas="get_dark_color">gtk_clutter_get_dark_color</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_get_dark_color          (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         <link linkend="GtkStateType">GtkStateType</link> state,
+                                                         <link linkend="ClutterColor">ClutterColor</link> *color);</programlisting>
+<para>
+Retrieves the dark color of <parameter>widget</parameter> for the given <parameter>state</parameter> and copies it
+into <parameter>color</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>state</parameter>&#160;:</term>
+<listitem><simpara> a state
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>color</parameter>&#160;:</term>
+<listitem><simpara> return location for a <link linkend="ClutterColor"><type>ClutterColor</type></link>
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="ClutterGtkTextureError" role="enum">
+<title>enum ClutterGtkTextureError</title>
+<indexterm zone="ClutterGtkTextureError"><primary>ClutterGtkTextureError</primary></indexterm><programlisting>typedef enum {
+  CLUTTER_GTK_TEXTURE_INVALID_STOCK_ID,
+
+  CLUTTER_GTK_TEXTURE_ERROR_LAST
+} ClutterGtkTextureError;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CLUTTER-GTK-TEXTURE-ERROR--CAPS" role="macro">
+<title>CLUTTER_GTK_TEXTURE_ERROR</title>
+<indexterm zone="CLUTTER-GTK-TEXTURE-ERROR--CAPS"><primary>CLUTTER_GTK_TEXTURE_ERROR</primary></indexterm><programlisting>#define CLUTTER_GTK_TEXTURE_ERROR gtk_clutter_texture_error_quark ()
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gtk-clutter-texture-new-from-pixbuf" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_new_from_pixbuf ()</title>
+<indexterm zone="gtk-clutter-texture-new-from-pixbuf" role="0.8"><primary sortas="texture_new_from_pixbuf">gtk_clutter_texture_new_from_pixbuf</primary></indexterm><programlisting><link linkend="ClutterActor">ClutterActor</link> *      gtk_clutter_texture_new_from_pixbuf (<link linkend="GdkPixbuf">GdkPixbuf</link> *pixbuf);</programlisting>
+<para>
+Creates a new <link linkend="ClutterTexture"><type>ClutterTexture</type></link> and sets its contents with a copy
+of <parameter>pixbuf</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>pixbuf</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GdkPixbuf"><type>GdkPixbuf</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the newly created <link linkend="ClutterTexture"><type>ClutterTexture</type></link>
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-texture-new-from-stock" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_new_from_stock ()</title>
+<indexterm zone="gtk-clutter-texture-new-from-stock" role="0.8"><primary sortas="texture_new_from_stock">gtk_clutter_texture_new_from_stock</primary></indexterm><programlisting><link linkend="ClutterActor">ClutterActor</link> *      gtk_clutter_texture_new_from_stock  (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *stock_id,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size);</programlisting>
+<para>
+Creates a new <link linkend="ClutterTexture"><type>ClutterTexture</type></link> and sets its contents using the stock
+icon <parameter>stock_id</parameter> as rendered by <parameter>widget</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>stock_id</parameter>&#160;:</term>
+<listitem><simpara> the stock id of the icon
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>size</parameter>&#160;:</term>
+<listitem><simpara> the size of the icon, or -1
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the newly created <link linkend="ClutterTexture"><type>ClutterTexture</type></link>
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-texture-new-from-icon-name" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_new_from_icon_name ()</title>
+<indexterm zone="gtk-clutter-texture-new-from-icon-name" role="0.8"><primary sortas="texture_new_from_icon_name">gtk_clutter_texture_new_from_icon_name</primary></indexterm><programlisting><link linkend="ClutterActor">ClutterActor</link> *      gtk_clutter_texture_new_from_icon_name
+                                                        (<link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *icon_name,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size);</programlisting>
+<para>
+Creates a new <link linkend="ClutterTexture"><type>ClutterTexture</type></link> and sets its contents to be
+the <parameter>icon_name</parameter> from the current icon theme.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link> or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>icon_name</parameter>&#160;:</term>
+<listitem><simpara> the name of the icon
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>size</parameter>&#160;:</term>
+<listitem><simpara> the size of the icon, or -1
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the newly created texture, or <link linkend="NULL--CAPS"><literal>NULL</literal></link> if <parameter>widget</parameter>
+  was <link linkend="NULL--CAPS"><literal>NULL</literal></link> and <parameter>icon_name</parameter> was not found.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-texture-set-from-pixbuf" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_set_from_pixbuf ()</title>
+<indexterm zone="gtk-clutter-texture-set-from-pixbuf" role="0.8"><primary sortas="texture_set_from_pixbuf">gtk_clutter_texture_set_from_pixbuf</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            gtk_clutter_texture_set_from_pixbuf (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GdkPixbuf">GdkPixbuf</link> *pixbuf,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Sets the contents of <parameter>texture</parameter> with a copy of <parameter>pixbuf</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>texture</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="ClutterTexture"><type>ClutterTexture</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pixbuf</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GdkPixbuf"><type>GdkPixbuf</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&#160;:</term>
+<listitem><simpara> a return location for errors
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> on success, <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> on failure.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-texture-set-from-stock" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_set_from_stock ()</title>
+<indexterm zone="gtk-clutter-texture-set-from-stock" role="0.8"><primary sortas="texture_set_from_stock">gtk_clutter_texture_set_from_stock</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            gtk_clutter_texture_set_from_stock  (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *stock_id,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Sets the contents of <parameter>texture</parameter> using the stock icon <parameter>stock_id</parameter>, as
+rendered by <parameter>widget</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>texture</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="ClutterTexture"><type>ClutterTexture</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>stock_id</parameter>&#160;:</term>
+<listitem><simpara> the stock id of the icon
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>size</parameter>&#160;:</term>
+<listitem><simpara> the size of the icon, or -1
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&#160;:</term>
+<listitem><simpara> a return location for errors
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> on success, <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> on failure.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+<refsect2 id="gtk-clutter-texture-set-from-icon-name" role="function" condition="since:0.8">
+<title>gtk_clutter_texture_set_from_icon_name ()</title>
+<indexterm zone="gtk-clutter-texture-set-from-icon-name" role="0.8"><primary sortas="texture_set_from_icon_name">gtk_clutter_texture_set_from_icon_name</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            gtk_clutter_texture_set_from_icon_name
+                                                        (<link linkend="ClutterTexture">ClutterTexture</link> *texture,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget,
+                                                         const <link linkend="gchar">gchar</link> *icon_name,
+                                                         <link linkend="GtkIconSize">GtkIconSize</link> size,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Sets the contents of <parameter>texture</parameter> using the <parameter>icon_name</parameter> from the
+current icon theme.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>texture</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="ClutterTexture"><type>ClutterTexture</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>widget</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link> or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>icon_name</parameter>&#160;:</term>
+<listitem><simpara> the name of the icon
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>size</parameter>&#160;:</term>
+<listitem><simpara> the icon size or -1
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&#160;:</term>
+<listitem><simpara> a return location for errors
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> on success, <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> on failure.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.8</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

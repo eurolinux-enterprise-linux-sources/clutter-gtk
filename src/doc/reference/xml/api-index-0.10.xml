@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="GtkClutterScrollable--hadjustment"><link linkend="GtkClutterScrollable--hadjustment">GtkClutterScrollable:hadjustment</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GtkClutterScrollable--vadjustment"><link linkend="GtkClutterScrollable--vadjustment">GtkClutterScrollable:vadjustment</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GtkClutterScrollableIface"><link linkend="GtkClutterScrollableIface">GtkClutterScrollableIface</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GtkClutterViewport--child"><link linkend="GtkClutterViewport--child">GtkClutterViewport:child</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GtkClutterViewport--origin"><link linkend="GtkClutterViewport--origin">GtkClutterViewport:origin</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>I</title>
+<indexentry><primaryie linkends="gtk-clutter-init-with-args"><link linkend="gtk-clutter-init-with-args">gtk_clutter_init_with_args</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>S</title>
+<indexentry><primaryie linkends="gtk-clutter-scrollable-get-adjustments"><link linkend="gtk-clutter-scrollable-get-adjustments">gtk_clutter_scrollable_get_adjustments</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gtk-clutter-scrollable-set-adjustments"><link linkend="gtk-clutter-scrollable-set-adjustments">gtk_clutter_scrollable_set_adjustments</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>V</title>
+<indexentry><primaryie linkends="gtk-clutter-viewport-get-origin"><link linkend="gtk-clutter-viewport-get-origin">gtk_clutter_viewport_get_origin</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gtk-clutter-viewport-new"><link linkend="gtk-clutter-viewport-new">gtk_clutter_viewport_new</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>Z</title>
+<indexentry><primaryie linkends="gtk-clutter-zoomable-get-adjustment"><link linkend="gtk-clutter-zoomable-get-adjustment">gtk_clutter_zoomable_get_adjustment</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gtk-clutter-zoomable-set-adjustment"><link linkend="gtk-clutter-zoomable-set-adjustment">gtk_clutter_zoomable_set_adjustment</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

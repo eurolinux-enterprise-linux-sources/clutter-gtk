@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<refentry id="GtkClutterZoomable">
+<refmeta>
+<refentrytitle role="top_of_page" id="GtkClutterZoomable.top_of_page">GtkClutterZoomable</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>CLUTTER-GTK Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GtkClutterZoomable</refname>
+<refpurpose>Interface for zoomable actors</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="GtkClutterZoomable.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+                    <link linkend="GtkClutterZoomable-struct">GtkClutterZoomable</link>;
+                    <link linkend="GtkClutterZoomableIface">GtkClutterZoomableIface</link>;
+<link linkend="void">void</link>                <link linkend="gtk-clutter-zoomable-set-adjustment">gtk_clutter_zoomable_set_adjustment</link> (<link linkend="GtkClutterZoomable">GtkClutterZoomable</link> *zoomable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *z_adjust);
+<link linkend="GtkAdjustment">GtkAdjustment</link> *     <link linkend="gtk-clutter-zoomable-get-adjustment">gtk_clutter_zoomable_get_adjustment</link> (<link linkend="GtkClutterZoomable">GtkClutterZoomable</link> *zoomable);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="GtkClutterZoomable.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----GtkClutterZoomable
+</synopsis>
+</refsect1>
+
+
+
+
+<refsect1 id="GtkClutterZoomable.implementations" role="implementations">
+<title role="implementations.title">Known Implementations</title>
+<para>
+GtkClutterZoomable is implemented by
+ <link linkend="GtkClutterViewport">GtkClutterViewport</link>.</para>
+</refsect1>
+
+
+
+
+<refsect1 id="GtkClutterZoomable.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+<link linkend="GtkClutterZoomable"><type>GtkClutterZoomable</type></link> is an interface for zoomable actors, using, like
+<link linkend="GtkClutterScrollable"><type>GtkClutterScrollable</type></link>, the <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link> objects from GTK+ to drive
+the zoom factor.
+</para>
+<para>
+<link linkend="GtkClutterZoomable"><type>GtkClutterZoomable</type></link> is available since Clutter-GTK 1.0</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="GtkClutterZoomable.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GtkClutterZoomable-struct" role="struct">
+<title>GtkClutterZoomable</title>
+<indexterm zone="GtkClutterZoomable-struct"><primary>GtkClutterZoomable</primary></indexterm><programlisting>typedef struct _GtkClutterZoomable GtkClutterZoomable;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GtkClutterZoomableIface" role="struct" condition="since:1.0">
+<title>GtkClutterZoomableIface</title>
+<indexterm zone="GtkClutterZoomableIface" role="1.0"><primary>GtkClutterZoomableIface</primary></indexterm><programlisting>typedef struct {
+  void           (* set_adjustment) (GtkClutterZoomable *zoomable,
+                                     GtkAdjustment      *z_adjust);
+
+  GtkAdjustment *(* get_adjustment) (GtkClutterZoomable *zoomable);
+} GtkClutterZoomableIface;
+</programlisting>
+<para>
+The <link linkend="GtkClutterZoomableIface"><type>GtkClutterZoomableIface</type></link> structure contains only private data</para>
+<para>
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>set_adjustment</structfield>&#160;()</term>
+<listitem><simpara> virtual function for setting the zoom adjustment
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_adjustment</structfield>&#160;()</term>
+<listitem><simpara> virtual function for getting the zoom adjustment
+</simpara></listitem>
+</varlistentry>
+</variablelist><para role="since">Since 1.0</para></refsect2>
+<refsect2 id="gtk-clutter-zoomable-set-adjustment" role="function" condition="since:0.10">
+<title>gtk_clutter_zoomable_set_adjustment ()</title>
+<indexterm zone="gtk-clutter-zoomable-set-adjustment" role="0.10"><primary sortas="zoomable_set_adjustment">gtk_clutter_zoomable_set_adjustment</primary></indexterm><programlisting><link linkend="void">void</link>                gtk_clutter_zoomable_set_adjustment (<link linkend="GtkClutterZoomable">GtkClutterZoomable</link> *zoomable,
+                                                         <link linkend="GtkAdjustment">GtkAdjustment</link> *z_adjust);</programlisting>
+<para>
+Sets the adjustment used to determine the zoom factor of
+the zoomable actor</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>zoomable</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterZoomable"><type>GtkClutterZoomable</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>z_adjust</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>. <acronym>null-ok</acronym>. </simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+<refsect2 id="gtk-clutter-zoomable-get-adjustment" role="function" condition="since:0.10">
+<title>gtk_clutter_zoomable_get_adjustment ()</title>
+<indexterm zone="gtk-clutter-zoomable-get-adjustment" role="0.10"><primary sortas="zoomable_get_adjustment">gtk_clutter_zoomable_get_adjustment</primary></indexterm><programlisting><link linkend="GtkAdjustment">GtkAdjustment</link> *     gtk_clutter_zoomable_get_adjustment (<link linkend="GtkClutterZoomable">GtkClutterZoomable</link> *zoomable);</programlisting>
+<para>
+Retrieves the adjustment used to determine the zoom factor of
+the zoomable actor</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>zoomable</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkClutterZoomable"><type>GtkClutterZoomable</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link>. <acronym>transfer</acronym> none. </simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 0.10</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

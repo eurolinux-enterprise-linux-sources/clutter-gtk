@@ -1,0 +1,65 @@
+<!-- ##### SECTION Title ##### -->
+GtkClutterScrollable
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GtkClutterScrollable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GtkClutterScrollable:hadjustment ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GtkClutterScrollable:vadjustment ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT GtkClutterScrollableIface ##### -->
+<para>
+
+</para>
+
+@set_adjustments: 
+@get_adjustments: 
+
+<!-- ##### FUNCTION gtk_clutter_scrollable_set_adjustments ##### -->
+<para>
+
+</para>
+
+@scrollable: 
+@h_adjust: 
+@v_adjust: 
+
+
+<!-- ##### FUNCTION gtk_clutter_scrollable_get_adjustments ##### -->
+<para>
+
+</para>
+
+@scrollable: 
+@h_adjust: 
+@v_adjust: 
+
+

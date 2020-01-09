@@ -1,0 +1,53 @@
+<!-- ##### SECTION Title ##### -->
+GtkClutterZoomable
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GtkClutterZoomable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GtkClutterZoomableIface ##### -->
+<para>
+
+</para>
+
+@set_adjustment: 
+@get_adjustment: 
+
+<!-- ##### FUNCTION gtk_clutter_zoomable_set_adjustment ##### -->
+<para>
+
+</para>
+
+@zoomable: 
+@z_adjust: 
+
+
+<!-- ##### FUNCTION gtk_clutter_zoomable_get_adjustment ##### -->
+<para>
+
+</para>
+
+@zoomable: 
+@Returns: 
+
+

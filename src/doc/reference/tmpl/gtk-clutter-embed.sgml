@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+GtkClutterEmbed
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GtkClutterEmbed ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GtkClutterEmbedClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gtk_clutter_embed_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gtk_clutter_embed_get_stage ##### -->
+<para>
+
+</para>
+
+@embed: 
+@Returns: 
+
+
